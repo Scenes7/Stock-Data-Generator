@@ -1,7 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 from bokeh.models import HoverTool
-from bokeh.embed import components
-from bokeh.plotting import ColumnDataSource, figure, output_file, show
+from bokeh.plotting import figure
 import yfinance as yf
 from bokeh.resources import INLINE
 import random
@@ -55,7 +54,7 @@ def calculate_changes(price, earnings, shares, industry=None, exchange=None, vol
     ret = [price]
     bench_eps, bench_pe = targetEps[industry], targetPE[industry]
 
-    for i in range(66): #91 days per quarter
+    for i in range(66):
         eps = earnings/shares
         pe = current_price/eps
 
