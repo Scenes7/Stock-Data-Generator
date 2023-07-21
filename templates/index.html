@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html id="gay">
+<head>
+    <title>Stock Graph</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {{ js_resources|indent(4)|safe }}
+    {{ css_resources|indent(4)|safe }}
+    {{ plot_script|indent(4)|safe }}
+</head>
+<body>
+    <div id="controls">
+        <div id="basicInfo">
+            <h3>Basic Information</h3>
+            <input type="text" name="name" id="name" placeholder="Company Name">
+            <input type="text" id="price" name="price" placeholder="Price per Share">
+            <select id="exchange" name="Stock Exchange">
+                <option value="select">Select Stock Exchange</option>
+                <option value="NYSE">NYSE</option>
+                <option value="NASDAQ">NASDAQ</option>
+                <option value="other">other</option>
+            </select>
+            <select id="industry" name="Select Industry">
+                <option value="select">Select Industry</option>
+                <option value="tech">Tech</option>
+                <option value="defense">Defense</option>
+                <option value="hedge">Hedge Fund</option>
+                <option value="other">other</option>
+            </select>
+        </div>
+
+        <div id="q1" class="quarter">
+            <h3>Q1</h3>
+            <input type="text" name="earnings1" id="earning1" placeholder="Earnings/Net Income">
+            <input type="text" id="shares1" name="shares1" placeholder="Number of Outstanding Shares">
+        </div>
+        <div id="q2" class="quarter">
+            <h3>Q2</h3>
+            <input type="text" name="earnings2" id="earning2" placeholder="Earnings/Net Income">
+            <input type="text" id="shares2" name="shares2" placeholder="Number of Outstanding Shares">
+        </div>
+        <div id="q3" class="quarter">
+            <h3>Q3</h3>
+            <input type="text" name="earnings3" id="earning3" placeholder="Earnings/Net Income">
+            <input type="text" id="shares3" name="shares3" placeholder="Number of Outstanding Shares">
+        </div>
+        <div id="q4" class="quarter">
+            <h3>Q4</h3>
+            <input type="text" name="earnings4" id="earning4" placeholder="Earnings/Net Income">
+            <input type="text" id="shares4" name="shares4" placeholder="Number of Outstanding Shares">
+        </div>
+    </div>
+    <div class="info">
+        <button id="submitBtn">
+            Create Graph
+        </button>
+        <p id="errorMessage">
+        </p>
+    </div>
+
+    <div id="bokeh-graph"></div>
+    <div id="graph_div">
+        {{ plot_div|safe }}
+    </div>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
