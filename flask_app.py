@@ -61,7 +61,6 @@ def calculate_changes(price, earnings, shares, industry=None, exchange=None, vol
         if (earnings < 0): eps_dif, pe_dif = eps-bench_eps, pe-bench_pe
         else: eps_dif, pe_dif = eps-bench_eps, bench_pe-pe
 
-        # print(i, eps, eps_dif, pe, pe_dif)
         growth = min(1, growth_function(eps_dif)/100)*current_price*mx + min(1, growth_function(pe_dif)/100)*current_price*mx
         current_price += growth + bias1
         current_price = max(1, current_price)
@@ -92,10 +91,11 @@ def index():
         js_resources=js_resources
     )
 
+
 @app.route('/submission', methods=['POST'])
 def createGraph():
+    #name, exchange, industry, earnings, price, shares
 
-    #name, exchange, industry, earnings, prices, shares
     actualData = json.loads(request.data)
 
     for field in fields:
@@ -108,7 +108,6 @@ def createGraph():
     price = actualData['price']
     shares = actualData['shares']
     print(name, earnings, price, shares, exchange, industry)
-    # print(request.data)
     quarters = len(shares)
 
     try:
@@ -161,7 +160,7 @@ def createGraph():
     # defense: +0.02
     #hedge: +0.01
     #other: +0.03
-    #market cap: max of 0.25, min of 0. addition of 0 if market cap > 500 B
+    #market cap: max of 0.6, min of 0. addition of basically 0 if market cap > 500 B, modeled by the function e^(-x-2)*100 + 10/x where x is market cap in billions
 
 
 if __name__ == '__main__':

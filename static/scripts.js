@@ -12,7 +12,6 @@ for (let i = 1; i <= 4; i++) {
     earnings.push(document.getElementById('earning' + i))
     shares.push(document.getElementById('shares' + i))
 }
-//earnings, price, shares
 
 exchange.addEventListener('change', () => {
 })
@@ -57,20 +56,12 @@ submitBtn.addEventListener('click', (e) => {
       item = JSON.parse(data)
       Bokeh.embed.embed_item(item);
     })
-        // .then(responseData => {
-        //     tt.innerHTML = responseData
-        //     // console.log('Response:', responseData);
-        //     // console.log(responseData.statusText)
-        // });
-
-    // sending 6 things; 3 var, 3 arrays
 })
 
 
-function isNumeric(str) { // you check strings using this, but maybe do all the processing in python?
+function isNumeric(str) { 
     if (typeof str != "string") return false
-    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-        !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+    return !isNaN(str) && !isNaN(parseFloat(str))
 }
 
 async function sendHttpRequest(url, method, data, headers) {
@@ -82,18 +73,10 @@ async function sendHttpRequest(url, method, data, headers) {
     };
 
     let response = await fetch(url, requestOptions);
-    // return fetch(url, requestOptions)
     if (!response.ok) {
       return ""
     }
     let ret = await response.text()
     return ret
 
-    // f.then(response => response.text())
-    // .then(data => {
-    //   return data;
-    // })
-    // .catch(error => {
-    //   console.error('ErrorAAAAAAAAA:', error);
-    // });
   }
