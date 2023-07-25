@@ -85,8 +85,6 @@ def index():
 
     return render_template(
         'index.html',
-        plot_script="", 
-        plot_div="", 
         css_resources=css_resources, 
         js_resources=js_resources
     )
